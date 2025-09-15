@@ -70,7 +70,7 @@ cp .env.example .env  # Windows: copy .env.example .env
 ### GUI alternative
 
 1. Download and install [Git](https://git-scm.com/downloads) and [Python 3.10+](https://www.python.org/downloads/) using their graphical installers. On Windows, ensure "Add Python to PATH" is checked.
-2. Visit [https://github.com/ehuntzbe/umamusume-ocr](https://github.com/ehuntzbe/umamusume-ocr) and either clone with GitHub Desktop or click **Code > Download ZIP**, then extract the archive.
+2. Visit [https://github.com/LegifyX/umalator-ocr](https://github.com/LegifyX/umalator-ocr) and either clone with GitHub Desktop or click **Code > Download ZIP**, then extract the archive.
 3. Open a terminal or command prompt in the project folder and run `pip install -r requirements.txt`.
 4. Copy `.env.example` to `.env` with your file manager and edit it in a text editor to adjust `LOG_LEVEL` or `LOCAL_WEB_LOGGING`.
 
