@@ -136,14 +136,17 @@ def _group_column(lines):
     return grouped
 
 
-def _group_skills(res):
+def _group_skills(res, img_height):
     lines = []
+    # Calculate dynamic threshold based on image height
+    skills_threshold = img_height * 0.3  # Adjust this ratio as needed
+    
     for box, text, _ in res:
         x0 = min(p[0] for p in box)
         y0 = min(p[1] for p in box)
         x1 = max(p[0] for p in box)
         y1 = max(p[1] for p in box)
-        if y0 < 850:
+        if y0 < skills_threshold:
             continue
         lines.append([x0, y0, x1, y1, text])
 
@@ -268,7 +271,7 @@ def extract(path: str) -> dict:
     skills = []
     seen = set()
 
-    groups = _group_skills(res)
+    groups = _group_skills(res, height)
     logger.debug("Grouped into %d skill boxes", len(groups))
     for x0, y0, x1, y1, text in groups:
         circle = _detect_circle(img, (x0, y0, x1, y1))
