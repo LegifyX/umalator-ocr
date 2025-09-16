@@ -1,4 +1,6 @@
-# umamusume-ocr
+# umalator-ocr
+
+Forked from https://github.com/ehuntzbe/umamusume-ocr to fix skills not being read properly if the screenshot was taken in windowed mode.
 
 ## How It Looks
 
