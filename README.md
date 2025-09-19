@@ -27,7 +27,9 @@ Outputs to the Umalator can be self-hosted or used on the public instance.
 
 ## Installation
 
-1. Clone the repository:
+1. Ensure Tkinter and Git are installed on your system.
+
+2. Clone the repository:
 
    ```
    bash
@@ -35,14 +37,12 @@ Outputs to the Umalator can be self-hosted or used on the public instance.
    cd umalator-ocr
    ```
 
-2. Install Python dependencies:
+3. Install Python dependencies:
 
    ```
    bash
    pip install -r requirements.txt
    ```
-
-3. Ensure Tkinter and Git are installed on your system.
 
 ## Configuration
 
@@ -122,6 +122,7 @@ Please review and comply with the licenses provided by those upstream projects (
 ## Code Generation
 
 Most of the source code in this repository was generated with the help of OpenAI's ChatGPT, Google's Gemini, and used Deepseek R1 models which were subsequently refined.
+
 
 
 
