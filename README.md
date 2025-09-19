@@ -1,6 +1,6 @@
 # umalator-ocr
 
-Fork of [umamusme-ocr](https://github.com/ehuntzbe/umamusume-ocr) from ehuntzbe, with the intention of combining everything into one single GUI application.
+Fork/Derivative of [umamusme-ocr](https://github.com/ehuntzbe/umamusume-ocr) from ehuntzbe, with the intention of combining everything into one single GUI application.
 
 UmalatorOCR is a tool for extracting Veteran Umamusume data from screenshots using OCR (Optical Character Recognition) for use on the [Umalator](https://alpha123.github.io/uma-tools/umalator-global/).
 
@@ -94,7 +94,7 @@ Debugging:
   - JSON dumps of raw OCR results will be written for analysis will be saved and viewable.
 
 Legacy:
-- [umamusme-ocr](https://github.com/ehuntzbe/umamusume-ocr) files with my original fix to uma_ocr_to_csv.py for the windowed application screenshots not being properly recognized remain.
+- [umamusme-ocr](https://github.com/ehuntzbe/umamusume-ocr) files with my original fix to uma_ocr_to_csv.py for the windowed application screenshots not being properly recognized remain in the git. These files are still functional.
 - For more information on how to use those tools, please refer to the original repository.
 
 ## Development notes
@@ -122,6 +122,7 @@ Please review and comply with the licenses provided by those upstream projects (
 ## Code Generation
 
 Most of the source code in this repository was generated with the help of OpenAI's ChatGPT, Google's Gemini, and used Deepseek R1 models which were subsequently refined.
+
 
 
 
