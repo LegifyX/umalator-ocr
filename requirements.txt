@@ -1,4 +1,11 @@
+# Core dependencies
+opencv-python
+numpy
+pillow
+python-dotenv
 rapidocr-onnxruntime
 rapidfuzz
-python-dotenv
-pillow
+
+# --- System dependencies (not installed via pip) ---
+# Tkinter (usually included with Python on Windows/Mac, on Linux install: sudo apt-get install python3-tk)
+# Git (required for cloning external repositories, must be installed and in PATH)

@@ -1,119 +1,77 @@
 # umalator-ocr
 
-Forked from https://github.com/ehuntzbe/umamusume-ocr to fix skills not being read properly if the screenshot was taken in windowed mode.
+Fork of [umamusme-ocr](https://github.com/ehuntzbe/umamusume-ocr) from ehuntzbe, with the intention of combining everything into one single GUI application.
 
-## How It Looks
+UmalatorOCR is a tool for extracting Veteran Umamusume data from screenshots using OCR (Optical Character Recognition) for use on the [Umalator](https://alpha123.github.io/uma-tools/umalator-global/).
 
-With the capture script running, taking a screenshot generates this output.
+Outputs to the Umalator can be self-hosted or used on the public instance.
 
-```bash
-INFO:uma_ocr_to_csv:Loaded 462 skills
-INFO:uma_ocr_to_csv:Loaded 30 umas
-INFO:uma_ocr_to_csv:Loaded 32 epithets
-Watching clipboard for images. Use your OS screenshot shortcut to capture a region. Press Ctrl+C to quit.
-INFO:uma_ocr_to_csv:Running OCR on C:\Users\umamusume-ocr\umamusume-ocr\data\clip_1755091036.png
-INFO:uma_ocr_to_csv:Extracted stats {'Speed': '1089', 'Stamina': '922', 'Power': '629', 'Guts': '379', 'Wit': '263', 'Skills': 'Flashy☆Landing|Red Shift/LP1211-M|Corner Adept ○|Straightaway Recovery|Homestretch Haste|Escape Artist|Flustered Front Runners|Medium Corners ◎|Dodging Danger', 'Name': 'Mayano Top Gun', 'Epithet': '[Scramble☆Zone]'} with 9 skills
-Added Mayano Top Gun to C:\Users\umamusume-ocr\umamusume-ocr\data\runners.csv
-```
+## Features
 
-Opening the UmaLator to URL script displays this screen of all the runners you've taken screenshots of.
-![Window containing two columns of selectable UmaMusume runner stats and skills.](./github-images/pick-runner.JPG)
+- OCR extraction of:
+  - Name & epithet
+  - Core stats
+  - Surface, Distance, and Style aptitudes (with defaults if detection fails)
+  - Skills 
+- Automatic CSV export (`runners.csv`)
+- Local server (on your computer) or external umalator server support for comparison.
 
-Selecting a pair of runners and clicking the button at the bottom opens a local copy of the UmaLator. The selection window stays open, so you can keep picking runners and opening new tabs.
-![UmaLator Global, populated with the select runners' stats and skills, running locally.](./github-images/local-umalator.JPG)
+![Window containing the UmalatorOCR GUI showing two columns of selectable veteran umamusume stats and skills](./github-images/UmalatorOCR_GUI.PNG)
 
-## Purpose
+## Requirements
 
-Convert Uma Musume race screenshots into structured data and open them in the UmaLator simulator.
+- **Python**: 3.9+ recommended
+- **System dependencies**:
+  - [Tkinter](https://wiki.python.org/moin/TkInter) (ships with Python on Windows/macOS; on Linux install with `sudo apt-get install python3-tk`)
+  - [Git](https://git-scm.com/) (needed for pulling icons/resources, must be installed and in PATH)
 
 ## Installation
- 
-The tools require Python 3.10+, Git, and a few system libraries.
 
-### Linux / WSL
+1. Clone the repository:
 
-```bash
-# 1. Install system packages (Debian/Ubuntu)
-sudo apt update
-sudo apt install -y git python3 python3-pip python3-tk libgl1
+   ```
+   bash
+   git clone https://github.com/YOUR-USERNAME/umalator-ocr.git
+   cd umalator-ocr
+   ```
+
+2. Install Python dependencies:
+
+   ```
+   bash
+   pip install -r requirements.txt
+   ```
+
+3. Ensure Tkinter and Git are installed on your system.
+
+## Configuration
+
+Create a .env file in the project root (example below), or edit the .env.example file and rename it to .env.:
+
 ```
-
-### macOS
-
-```bash
-# 1. Install prerequisites with Homebrew
-brew update
-brew install git python@3 tcl-tk
+# Logging level (INFO or DEBUG)
+# Valid levels: DEBUG, INFO, WARNING, ERROR, CRITICAL
+LOG_LEVEL=INFO
 ```
-
-### Windows
-
-```powershell
-# 1. Install Git and Python with winget
-winget install -e --id Git.Git
-winget install -e --id Python.Python.3.10
-```
-
-### Common steps
-
-```bash
-# 2. Clone this repository
-git clone https://github.com/ehuntzbe/umamusume-ocr.git
-cd umamusume-ocr
-
-# 3. Install Python dependencies
-pip install -r requirements.txt
-
-# 4. Configure environment variables
-cp .env.example .env  # Windows: copy .env.example .env
-# edit .env to set LOG_LEVEL=INFO or enable LOCAL_WEB_LOGGING=true
-```
-
-### GUI alternative
-
-1. Download and install [Git](https://git-scm.com/downloads) and [Python 3.10+](https://www.python.org/downloads/) using their graphical installers. On Windows, ensure "Add Python to PATH" is checked.
-2. Visit [https://github.com/LegifyX/umalator-ocr](https://github.com/LegifyX/umalator-ocr) and either clone with GitHub Desktop or click **Code > Download ZIP**, then extract the archive.
-3. Open a terminal or command prompt in the project folder and run `pip install -r requirements.txt`.
-4. Copy `.env.example` to `.env` with your file manager and edit it in a text editor to adjust `LOG_LEVEL` or `LOCAL_WEB_LOGGING`.
-
-### Environment variables
-
-The scripts read configuration from `.env` in the project root. Available settings include:
-
-- `LOG_LEVEL` — logging verbosity (`DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`)
-- `LOCAL_WEB_LOGGING` — set to `true` to enable request logging for the local web server used by `uma_csv_to_url.py`
 
 ## Usage
 
-### Command line
+Run the GUI application:
 
-1. Place race result screenshots in the `data` directory (`data/` on Linux/macOS, `data\` on Windows).
-2. Run the OCR script:
+```
+python UmalatorOCR.py
 
-   ```bash
-   python uma_ocr_to_csv.py
-   ```
-
-   The script writes `data/runners.csv` and moves processed images to `data/processed/`.
-3. Build an UmaLator share link:
-
-   ```bash
-   python uma_csv_to_url.py
-   ```
-
-   A GUI lists the runners in `data/runners.csv`. Select two entries and the tool opens your browser to a locally served copy of UmaLator preloaded with those runners. Copy the portion of the URL after `index.html` to share or append to the public instance at https://alpha123.github.io/uma-tools/umalator-global/ as long as both versions remain in sync.
-
-### Clipboard watcher
-
-For a faster workflow, you can monitor the clipboard for new screenshots:
-
-```bash
-python uma_clipboard_ocr.py
 ```
 
-When an image is copied to your clipboard, the script saves it, extracts stats and skills, appends the data to `data/runners.csv`, and moves the image to `data/processed/` automatically. This script works on Windows, macOS, and Linux.
+Processing screenshots:
+1. Place your Veteran Umamusume screenshots in the `data` directory.
+2. Click "Process Screenshots" in the GUI.
+3. The extracted data will be saved to `runners.csv` also in the `data` directory.
+4. Processed Umas will be found in the `data/processed` directory.
 
-### Taking screenshots
+- Make sure to capture the entire window, not just up to the skills. You must capture everything including the "close" button in the bottom of the image.
+
+Alternatively, you can tick the `Monitor Clipboard` option to automatically process screenshots copied to your clipboard.
 
 Use your operating system's shortcut to capture a region of the screen and copy it to the clipboard:
 
@@ -121,26 +79,47 @@ Use your operating system's shortcut to capture a region of the screen and copy 
 - **macOS**: `Cmd+Ctrl+Shift+4`
 - **Linux**: use your desktop environment's screenshot tool (e.g., `gnome-screenshot -a`)
 
-### GUI alternative
+Outputting Screenshots to Umalator:
+- By default, the application is set to output to a local Umalator instance.
+- To change this, edit the `UMALATOR_URL` variable in the top right of the GUI. The default external host is: https://alpha123.github.io/uma-tools/umalator-global/
+- Pick your two veteran umamusume.
+- Pick the Strategy, Surface, Distance, and Style aptitudes if they are not correct.
+- Pick the track, weather, and ground condition.
+- Click "Open Umalator Comparison" to open the Umalator in your web browser with the data pre-filled.
 
-1. Place race result screenshots in the `data` folder using your file manager.
-2. Double-click `uma_ocr_to_csv.py`. A terminal window appears and processes the images.
-3. After the CSV is created, double-click `uma_csv_to_url.py`. The runner selection window appears, and when you choose two runners, your browser opens a locally hosted UmaLator page with those runners preloaded. You can copy the segment of the URL after `index.html` and append it to the public UmaLator site if the repositories are in sync.
+Debugging:
+- Enable DEBUG logging in the .env file to see detailed logs.
+- If `LOG_LEVEL=DEBUG` is set in `.env`:
+  - OCR bounding boxes and aptitude block extractions will be saved and viewable.
+  - JSON dumps of raw OCR results will be written for analysis will be saved and viewable.
 
-## How it works
+Legacy:
+- [umamusme-ocr](https://github.com/ehuntzbe/umamusume-ocr) files with my original fix to uma_ocr_to_csv.py for the windowed application screenshots not being properly recognized remain.
+- For more information on how to use those tools, please refer to the original repository.
 
-- `uma_ocr_to_csv.py` uses RapidOCR to detect text in screenshots, normalizes the results, and fuzzy-matches them against canonical names and skills from the `uma-tools` repository. Each screenshot's stats and skills are appended to a CSV.
-- `uma_csv_to_url.py` reads that CSV, maps skill names to IDs from `uma-skill-tools`, serves UmaLator's static assets locally, and provides a Tk GUI for selecting two runners before constructing a share URL. The URL path after `index.html` is compatible with the public UmaLator instance at https://alpha123.github.io/uma-tools/umalator-global/ when this repository remains in sync with upstream.
+## Development notes
+
+- Aptitudes defaults are A if detection fails.
+- Style default is Front Runner if detection fails.
+
+## Known Issues
+- OCR accuracy may vary based on screenshot quality and resolution.
+- OCR of the aptitudes (Track, Distance, Style) may not always be accurate. Sometimes the OCR just does not want to co-operate.
+- Selection of the Style for the veteran umaumsume may not always be accurate. This code is somewhat experimental.
+- Some skills may not be recognized correctly, especially if they are partially obscured.
 
 ## Licensing and Dependencies
 
-This project leverages two related open-source repositories:
+This project leverages three related open-source repositories:
 
 - [uma-tools](https://github.com/alpha123/uma-tools) for general Uma Musume data utilities
 - [uma-skill-tools](https://github.com/alpha123/uma-skill-tools) for skill-related processing
+- [umamusume-ocr](https://github.com/ehuntzbe/umamusume-ocr) for the original idea and OCR processing code.
 
 Please review and comply with the licenses provided by those upstream projects (for example, `uma-skill-tools` is GPLv3). This repository is itself distributed under the [GNU General Public License v3](LICENSE), and contributions must remain compatible with both the GPLv3 and the licenses of the above repositories.
 
 ## Code Generation
 
-Most of the source code in this repository was generated with the help of OpenAI's ChatGPT Codex and subsequently refined.
+Most of the source code in this repository was generated with the help of OpenAI's ChatGPT, Google's Gemini, and used Deepseek R1 models which were subsequently refined.
+
+
