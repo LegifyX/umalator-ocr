@@ -31,7 +31,7 @@ Outputs to the Umalator can be self-hosted or used on the public instance.
 
    ```
    bash
-   git clone https://github.com/YOUR-USERNAME/umalator-ocr.git
+   git clone https://github.com/LegifyX/umalator-ocr.git
    cd umalator-ocr
    ```
 
@@ -121,5 +121,6 @@ Please review and comply with the licenses provided by those upstream projects (
 ## Code Generation
 
 Most of the source code in this repository was generated with the help of OpenAI's ChatGPT, Google's Gemini, and used Deepseek R1 models which were subsequently refined.
+
 
 
