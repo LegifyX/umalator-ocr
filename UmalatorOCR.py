@@ -843,7 +843,7 @@ class UmalatorApp:
         self.runner_surface_apt = [tk.StringVar(value="A"), tk.StringVar(value="A")]
         self.runner_strategy_apt = [tk.StringVar(value="A"), tk.StringVar(value="A")]
 
-        self.ground_var = tk.StringVar(value=GROUND_CONDITIONS[1])
+        self.ground_var = tk.StringVar(value=GROUND_CONDITIONS[0])
         self.weather_var = tk.StringVar(value=WEATHER_CONDITIONS[0])
         self.season_var = tk.StringVar(value=SEASON_CONDITIONS[0])
 
