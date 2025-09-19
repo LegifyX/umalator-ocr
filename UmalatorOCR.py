@@ -173,13 +173,16 @@ class DataManager:
         self.skill_norm_map = {self._normalize(name): name for name in self.skill_names}
         self.skill_id_map = {}
         for skill_id, names in skill_data.items():
-            for name in names:
+            for idx, name in enumerate(names):
                 key = name.lower()
                 entry = self.skill_id_map.setdefault(key, {"normal": "", "inherited": ""})
+
                 if skill_id.startswith("9"):
+                    # Only set inherited if empty
                     if not entry["inherited"]:
                         entry["inherited"] = skill_id
                 else:
+                    # Only set normal if empty (first non-9 assignment wins)
                     if not entry["normal"]:
                         entry["normal"] = skill_id
 
