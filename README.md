@@ -107,6 +107,7 @@ Legacy:
 - OCR of the aptitudes (Track, Distance, Style) may not always be accurate. Sometimes the OCR just does not want to co-operate.
 - Selection of the Style for the veteran umaumsume may not always be accurate. This code is somewhat experimental.
 - Some skills may not be recognized correctly, especially if they are partially obscured.
+- Unique skills will register as the original unique skill even when inherited. Please fix this in the Umalator yourself.
 
 ## Licensing and Dependencies
 
@@ -121,6 +122,7 @@ Please review and comply with the licenses provided by those upstream projects (
 ## Code Generation
 
 Most of the source code in this repository was generated with the help of OpenAI's ChatGPT, Google's Gemini, and used Deepseek R1 models which were subsequently refined.
+
 
 
 
